@@ -9,6 +9,10 @@ import cardType from "./../../models/types/cardType";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 import { useUser } from "../../../users/providers/UserProvider";
+//
+import { Box, IconButton } from "@mui/material";
+import CallIcon from "@mui/icons-material/Call";
+//
 
 const Card = ({ card, onDelete, onLike }) => {
   const navigate = useNavigate();
@@ -17,7 +21,8 @@ const Card = ({ card, onDelete, onLike }) => {
   return (
     <MuiCard sx={{ minWidth: 280 }}>
       <CardActionArea
-        onClick={() => navigate(`${ROUTES.CARD_DETAILS}/${card._id}`)}>
+        onClick={() => navigate(`${ROUTES.CARD_DETAILS}/${card._id}`)}
+      >
         <CardHead image={card.image} />
         <CardBody card={card} />
       </CardActionArea>
@@ -30,6 +35,15 @@ const Card = ({ card, onDelete, onLike }) => {
           userId={card.user_id}
         />
       )}
+      {/* start LocalPhone */}
+      <Box>
+        {!user && (
+          <IconButton aria-label="call unconnected">
+            <CallIcon />
+          </IconButton>
+        )}
+      </Box>
+      {/* end   LocalPhone */}
     </MuiCard>
   );
 };
